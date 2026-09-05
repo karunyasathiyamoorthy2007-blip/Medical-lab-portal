@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Medical Lab Portal</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>Medical Lab Portal</h1>
+    <p>Book your laboratory tests easily</p>
+
+    <div class="box">
+        <h2>Login</h2>
+
+        <input type="email" id="loginEmail" placeholder="Email">
+
+        <input type="password" id="loginPassword" placeholder="Password">
+
+        <button onclick="login()">Login</button>
+
+        <p id="loginMessage"></p>
+    </div>
+
+    <div class="box">
+        <h2>Book Lab Test</h2>
+
+        <input type="text" id="patientName" placeholder="Patient Name">
+
+        <input type="text" id="testName" placeholder="Test Name">
+
+        <input type="date" id="bookingDate">
+
+        <button onclick="bookTest()">Book Test</button>
+
+        <p id="bookingMessage"></p>
+    </div>
+
+    <div class="box">
+        <h2>All Bookings</h2>
+
+        <button onclick="getBookings()">View Bookings</button>
+
+        <div id="bookingList"></div>
+    </div>
+
+</div>
+
+<script src="script.js"></script>
+
+</body>
+</html>
