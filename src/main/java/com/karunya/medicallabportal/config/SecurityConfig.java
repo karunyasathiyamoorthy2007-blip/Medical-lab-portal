@@ -4,6 +4,9 @@ import com.karunya.medicallabportal.model.User;
 import com.karunya.medicallabportal.repository.UserRepository;
 
 import org.springframework.context.annotation.Bean;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.context.annotation.Configuration;
 
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -52,7 +55,7 @@ public class SecurityConfig {
 
         http
             .csrf(csrf -> csrf.disable())
-
+            .cors(cors -> {})
             .authorizeHttpRequests(auth -> auth
 
                 .requestMatchers(
@@ -60,6 +63,10 @@ public class SecurityConfig {
                     "/index.html",
                     "/script.js",
                     "/style.css",
+                    "/error",
+                    "/health"
+                ).permitAll()
+                .requestMatchers(
                     "/api/users/signup",
                     "/api/users/login"
                 ).permitAll()
@@ -76,5 +83,17 @@ public class SecurityConfig {
             .httpBasic(httpBasic -> {});
 
         return http.build();
+    }
+    @Bean
+    public CorsConfigurationSource corsConfigurationSource() {
+        CorsConfiguration configuration = new CorsConfiguration();
+        configuration.setAllowedOrigins(java.util.List.of("*"));
+        configuration.setAllowedMethods(
+            java.util.List.of("GET", "POST", "PUT", "DELETE", "OPTIONS")
+        );
+        configuration.setAllowedHeaders(java.util.List.of("*"));
+        UrlBasedCorsConfigurationSource source=new UrlBasedCorsConfigurationSource();
+        source.registerCorsConfiguration("/**", configuration);
+        return source;
     }
 }

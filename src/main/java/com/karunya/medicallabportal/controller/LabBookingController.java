@@ -6,6 +6,7 @@ import com.karunya.medicallabportal.service.LabBookingService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/api/bookings")
@@ -18,7 +19,7 @@ public class LabBookingController {
     }
 
     @PostMapping
-    public LabBooking createBooking(@RequestBody LabBooking booking) {
+    public LabBooking createBooking(@Valid @RequestBody LabBooking booking) {
         return bookingService.createBooking(booking);
     }
 
@@ -34,7 +35,7 @@ public class LabBookingController {
 
     @PutMapping("/{id}")
     public LabBooking updateBooking(@PathVariable Long id,
-                                    @RequestBody LabBooking booking) {
+                                    @Valid @RequestBody LabBooking booking) {
         booking.setId(id);
         return bookingService.updateBooking(booking);
     }

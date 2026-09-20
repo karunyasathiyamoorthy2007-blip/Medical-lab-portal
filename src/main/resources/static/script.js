@@ -1,7 +1,11 @@
+let loginEmail = "";
+let loginPassword = "";
 function login() {
 
     const email = document.getElementById("loginEmail").value;
     const password = document.getElementById("loginPassword").value;
+    loginEmail = email;
+    loginPassword = password;
 
     fetch("/api/users/login", {
         method: "POST",
@@ -38,7 +42,8 @@ function bookTest() {
     fetch("/api/bookings", {
         method: "POST",
         headers: {
-            "Content-Type": "application/json"
+            "Content-Type": "application/json",
+            "Authorization": "Basic " + btoa(loginEmail + ":" + loginPassword)
         },
         body: JSON.stringify({
             patientName: patientName,

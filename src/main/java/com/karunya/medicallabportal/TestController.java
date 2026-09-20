@@ -10,4 +10,8 @@ public class TestController
     {
         return "Medical Lab Portal is Running Successfully!";
     }
+    @GetMapping("/health")
+    public String health() {
+        return "OK";
+    }
 }
