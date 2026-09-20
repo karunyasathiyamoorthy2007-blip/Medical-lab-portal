@@ -2,33 +2,87 @@
 
 ## 1. Project Overview
 
-Medical Lab Portal is a web-based application that allows users to register, log in, and book medical laboratory tests. The system stores user and booking information in a MySQL database.
+Medical Lab Portal is a web-based application for managing medical laboratory test bookings.
+
+Users can register, log in, and book laboratory tests. The system provides role-based access for Users and Administrators and stores application data using MySQL.
 
 ## 2. Problem Statement
 
-Patients often need a simple way to manage medical laboratory test bookings. This project provides an online portal where users can register, log in, and book laboratory tests. The system stores the booking information securely in a database and allows bookings to be retrieved when required.
+Patients need a simple way to manage medical laboratory test bookings.
+
+The Medical Lab Portal provides an online system where users can register, log in, and book laboratory tests. Administrators can manage and view registered users.
+
+The application also provides validation, password encryption, role-based authorization, testing, and health monitoring.
 
 ## 3. Features
 
-* User Registration (Signup)
-* User Login
-* User Authentication
-* Lab Test Booking
-* View All Lab Bookings
-* MySQL Database Storage
+### User Features
+
+- User Registration
+- User Login
+- Password Encryption using BCrypt
+- Lab Test Booking
+- View Lab Bookings
+- Booking Validation
+
+### Admin Features
+
+- Admin Login
+- View All Registered Users
+- Role-Based Access Control
+- Admin APIs protected from normal Users
+
+### System Features
+
+- MySQL Database
+- REST APIs
+- Server-Side Validation
+- CORS Configuration
+- Health Check Endpoint
+- Unit Testing
+- H2 Test Database
+- JaCoCo Code Coverage
+- GitHub Actions CI
 
 ## 4. Technologies Used
 
-* Java 17
-* Spring Boot
-* Spring Data JPA
-* Spring Security
-* MySQL
-* Maven
-* Visual Studio Code
-* draw.io
+- Java 17
+- Spring Boot
+- Spring Data JPA
+- Spring Security
+- Spring Validation
+- MySQL
+- H2 Database
+- Maven
+- JaCoCo
+- GitHub Actions
+- Visual Studio Code
+- draw.io
 
-## 5. Database
+## 5. User Roles
+
+The system contains two roles:
+
+| Role | Access |
+|------|--------|
+| USER | Login, create bookings, view bookings |
+| ADMIN | Admin APIs and user management |
+
+Public signup always creates a USER account.
+
+## 6. Security
+
+The application uses Spring Security for authorization.
+
+Passwords are stored using BCrypt hashing.
+
+Admin APIs require the ADMIN role.
+
+Booking APIs require either USER or ADMIN access.
+
+Sensitive password information is not returned in the user response.
+
+## 7. Database
 
 Database Name:
 
@@ -36,108 +90,41 @@ Database Name:
 
 Main tables:
 
-* `user`
-* `lab_booking`
+- `user`
+- `lab_booking`
 
-## 6. Project Structure
+The application uses Spring Data JPA for database operations.
+
+## 8. Project Structure
 
 ```text
 medical-lab-portal
 │
 ├── src
-│   └── main
+│   ├── main
+│   │   ├── java
+│   │   │   └── com.karunya.medicallabportal
+│   │   │       ├── config
+│   │   │       ├── controller
+│   │   │       ├── dto
+│   │   │       ├── model
+│   │   │       ├── repository
+│   │   │       └── service
+│   │   │
+│   │   └── resources
+│   │       ├── static
+│   │       └── application.properties
+│   │
+│   └── test
 │       └── java
-│           └── com.karunya.medicallabportal
-│               ├── config
-│               ├── controller
-│               ├── model
-│               └── repository
 │
 ├── docs
 │   └── diagrams
-│       ├── ER_Diagram.png
-│       ├── System_Architecture.png
-│       └── Class_Module_Diagram.png
+│
+├── .github
+│   └── workflows
+│       └── maven.yml
 │
 ├── pom.xml
+├── CHANGELOG.md
 └── README.md
-```
-
-## 7. How to Run
-
-### Step 1: Start MySQL
-
-Make sure MySQL Server is running.
-
-### Step 2: Open the project
-
-Open the `medical-lab-portal` folder in Visual Studio Code.
-
-### Step 3: Run the Spring Boot application
-
-Open the VS Code terminal and run:
-
-```powershell
-.\mvnw.cmd spring-boot:run
-```
-
-The application runs on:
-
-`http://localhost:8080`
-
-## 8. API Endpoints
-
-### Signup
-
-```text
-POST /api/users/signup
-```
-
-### Login
-
-```text
-POST /api/users/login
-```
-
-### Create Booking
-
-```text
-POST /api/bookings
-```
-
-### View All Bookings
-
-```text
-GET /api/bookings
-```
-
-## 9. Working Modules
-
-### User Management Module
-
-Users can:
-
-* Create an account
-* Log in using email and password
-
-### Lab Booking Module
-
-Users can:
-
-* Book a laboratory test
-* Store patient name, test name and booking date
-* View all bookings
-
-## 10. Review 1 Status
-
-The following basic functionalities have been implemented:
-
-* User Signup
-* User Login
-* MySQL Database Connection
-* Lab Booking
-* View All Bookings
-* System Architecture Diagram
-* ER Diagram
-* Class/Module Diagram
-* Project Documentation
